@@ -57,7 +57,7 @@ sealed trait HttpEntity extends jm.HttpEntity {
    *
    * In many cases it's dangerous to rely on the (non-)existence of a content-length.
    * HTTP intermediaries like (transparent) proxies are allowed to change the transfer-encoding
-   * which can result in the entity being delivered as another type as expected.
+   * which can result in the entity being delivered as another type than expected.
    */
   def contentLengthOption: Option[Long]
 

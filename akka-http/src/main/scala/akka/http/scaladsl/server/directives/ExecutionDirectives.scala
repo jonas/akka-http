@@ -39,6 +39,43 @@ trait ExecutionDirectives {
    * Transforms rejections produced by its inner route using the given
    * [[akka.http.scaladsl.server.RejectionHandler]].
    *
+   * Using this directive is an alternative to using a global implicitly defined
+   * [[akka.http.scaladsl.server.RejectionHandler]] that applies to the complete
+   * route.
+   *
+   * See @ref[Rejections](../../rejections.md#rejections-scala) for general information about options for handling rejections.
+   *
+   * @example
+   * {{{
+   * val totallyMissingHandler = RejectionHandler.newBuilder()
+   *   .handleNotFound { complete((StatusCodes.NotFound, "Oh man, what you are looking for is long gone.")) }
+   *   .handle { case ValidationRejection(msg, _) => complete((StatusCodes.InternalServerError, msg)) }
+   *   .result()
+   * val route =
+   *   pathPrefix("handled") {
+   *     handleRejections(totallyMissingHandler) {
+   *       path("existing")(complete("This path exists")) ~
+   *         path("boom")(reject(new ValidationRejection("This didn't work.")))
+   *     }
+   *   }
+   *
+   * // tests:
+   * Get("/handled/existing") ~> route ~> check {
+   *   responseAs[String] shouldEqual "This path exists"
+   * }
+   * Get("/missing") ~> Route.seal(route) /* applies default handler */ ~> check {
+   *   status shouldEqual StatusCodes.NotFound
+   *   responseAs[String] shouldEqual "The requested resource could not be found."
+   * }
+   * Get("/handled/missing") ~> route ~> check {
+   *   status shouldEqual StatusCodes.NotFound
+   *   responseAs[String] shouldEqual "Oh man, what you are looking for is long gone."
+   * }
+   * Get("/handled/boom") ~> route ~> check {
+   *   status shouldEqual StatusCodes.InternalServerError
+   *   responseAs[String] shouldEqual "This didn't work."
+   * }
+   * }}}
    * @group execution
    */
   def handleRejections(handler: RejectionHandler): Directive0 =
