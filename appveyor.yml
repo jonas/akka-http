@@ -14,11 +14,11 @@ install:
   - cmd: SET PATH=C:\sbt\sbt\bin;%JAVA_HOME%\bin;%PATH%
 environment:
   SBT_OPTS: -Dfile.encoding=UTF8 -Xmx4g
-  JAVA_OPTS: -Dfile.encoding=UTF8
+  JAVA_OPTS: -Dfile.encoding=UTF8 -Dakka.test.timefactor=1.5
 build_script:
   - sbt clean compile
 test_script:
-  - sbt -Dakka.test.timefactor=1.5 'set inThisBuild(inConfig(Test)(Seq(javaOptions += "-Dakka.test.timefactor=1.5", testOptions += Tests.Argument("-oF"))))' test
+  - sbt test
 cache:
   - C:\sbt\
   - C:\Users\appveyor\.m2
