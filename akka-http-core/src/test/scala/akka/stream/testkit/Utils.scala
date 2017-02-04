@@ -4,7 +4,7 @@ import akka.actor.ActorRef
 import akka.actor.ActorRefWithCell
 import akka.stream.Materializer
 import akka.stream.impl._
-import akka.testkit.TestProbe
+import akka.testkit._
 import com.typesafe.config.ConfigFactory
 import scala.concurrent.duration._
 import scala.util.control.NoStackTrace
@@ -23,7 +23,7 @@ object Utils {
         probe.send(impl.supervisor, StreamSupervisor.StopChildren)
         probe.expectMsg(StreamSupervisor.StoppedChildren)
         val result = block
-        probe.within(5.seconds) {
+        probe.within(5.seconds.dilated(impl.system)) {
           var children = Set.empty[ActorRef]
           try probe.awaitAssert {
             impl.supervisor.tell(StreamSupervisor.GetChildren, probe.ref)
