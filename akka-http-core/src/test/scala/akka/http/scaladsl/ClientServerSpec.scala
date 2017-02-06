@@ -224,13 +224,12 @@ class ClientServerSpec extends WordSpec with Matchers with BeforeAndAfterAll wit
       "support server timeouts" should {
         "close connection with idle client after idleTimeout" in {
           val serverTimeout = 300.millis
-          val (_, hostname, port) = TestUtils.temporaryServerHostnameAndPort()
-          val (receivedRequest: Promise[Long], b1: ServerBinding) = bindServer(hostname, port, serverTimeout)
+          val (receivedRequest: Promise[Long], b1: ServerBinding) = bindServer("localhost", 0, serverTimeout)
 
           try {
             def runIdleRequest(uri: Uri): Future[HttpResponse] = {
               val itNeverEnds = Chunked.fromData(ContentTypes.`text/plain(UTF-8)`, Source.maybe[ByteString])
-              Http().outgoingConnection(hostname, port)
+              Http().outgoingConnection(b1.localAddress.getHostName, b1.localAddress.getPort)
                 .runWith(Source.single(HttpRequest(PUT, uri, entity = itNeverEnds)), Sink.head)
                 ._2
             }
