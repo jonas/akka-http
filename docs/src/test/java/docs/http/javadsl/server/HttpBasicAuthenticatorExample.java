@@ -16,7 +16,7 @@ import akka.http.scaladsl.model.headers.Authorization;
 public class HttpBasicAuthenticatorExample extends JUnitRouteTest {
 
     private final String hardcodedPassword = "correcthorsebatterystaple";
-    
+
     private Optional<String> authenticate(Optional<ProvidedCredentials> creds) {
         // this is where your actual authentication logic would go
         return creds

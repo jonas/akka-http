@@ -16,14 +16,14 @@ import org.junit.Test;
 public class OAuth2AuthenticatorExample extends JUnitRouteTest {
 
     private final String hardcodedToken = "token";
-    
+
     private Optional<String> authenticate(Optional<ProvidedCredentials> creds) {
         // this is where your actual authentication logic would go, looking up the user
         // based on the token or something in that direction
-        
+
         // We will not allow anonymous access.
         return creds
-            .filter(c -> c.verify(hardcodedToken))  // 
+            .filter(c -> c.verify(hardcodedToken))  //
             .map(c -> c.identifier());              // Provide the "identifier" down to the inner route
                                                     // (for OAuth2, that's actually just the token)
     }

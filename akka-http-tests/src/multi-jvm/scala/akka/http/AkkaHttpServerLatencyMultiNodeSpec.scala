@@ -36,13 +36,13 @@ object AkkaHttpServerLatencyMultiNodeSpec extends MultiNodeConfig {
         stream.materializer.debug.fuzzing-mode = off
 
         testconductor.barrier-timeout = 30m
-        
+
         test.AkkaHttpServerLatencySpec {
           enable = off
-          
+
           rate = 10000
           duration = 30s
-          
+
           totalRequestsFactor = 1.0
         }
       }
@@ -126,11 +126,11 @@ class AkkaHttpServerLatencyMultiNodeSpec extends MultiNodeSpec(AkkaHttpServerLat
   val source_100x: Source[ByteString, NotUsed] = Source.repeat(MediumByteString).take(100)
   val tenXResponseLength = array_10x.length
   val hundredXResponseLength = array_100x.length
-  
+
   // format: OFF
   val routes: Route = {
     import Directives._
-    
+
     path("ping") {
       complete("PONG!")
     } ~

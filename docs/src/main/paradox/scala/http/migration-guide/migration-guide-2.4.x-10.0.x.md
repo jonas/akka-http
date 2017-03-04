@@ -7,7 +7,7 @@ which is **stable** and won't be breaking compatibility without a proper depreca
 and *akka-http* which contains the routing DSLs which is **experimental** still.
 
 The following migration guide explains migration steps to be made between breaking
-versions of the **experimental** part of Akka HTTP. 
+versions of the **experimental** part of Akka HTTP.
 
 @@@ note
 Please note that experimental modules are allowed (and are expected to) break compatibility

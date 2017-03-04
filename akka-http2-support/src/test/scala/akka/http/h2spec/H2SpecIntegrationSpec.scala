@@ -25,10 +25,10 @@ class H2SpecIntegrationSpec extends AkkaSpec(
      akka {
        loglevel = INFO
        http.server.log-unencrypted-network-bytes = off
-        
+
        actor.serialize-creators = off
        actor.serialize-messages = off
-       
+
        stream.materializer.debug.fuzzing-mode = off
      }
   """) with Directives with ScalaFutures {
@@ -87,7 +87,7 @@ class H2SpecIntegrationSpec extends AkkaSpec(
         8.2. Server Push
       """.split("\n").map(_.trim).filterNot(_.isEmpty)
 
-    // execution of tests ------------------------------------------------------------------ 
+    // execution of tests ------------------------------------------------------------------
     val runningOnJenkins = sys.env.get("BUILD_NUMBER").isDefined
 
     if (runningOnJenkins) {
@@ -106,11 +106,11 @@ class H2SpecIntegrationSpec extends AkkaSpec(
           }
       }
     }
-    // end of execution of tests ----------------------------------------------------------- 
+    // end of execution of tests -----------------------------------------------------------
 
     def runSpec(specSectionNumber: String = null, junitOutput: File = null): Unit = {
       require(specSectionNumber != null ^ junitOutput != null, "Only one of the parameters must be not null, selecting the mode we run in.")
-      val TestFailureMarker = "×" // that special character is next to test failures, so we detect them by it 
+      val TestFailureMarker = "×" // that special character is next to test failures, so we detect them by it
 
       val keepAccumulating = new AtomicBoolean(true)
       val sb = new StringBuffer()

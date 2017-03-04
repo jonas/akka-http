@@ -9,7 +9,7 @@ The `entity` method will either pass the `value` to the inner route or map the `
 `akka.http.javadsl.server.Rejection`.
 
 The `entity` directive works in conjunction with `as` and `akka.http.scaladsl.unmarshalling` to
-convert some serialized "wire format" value into a higher-level object structure.  
+convert some serialized "wire format" value into a higher-level object structure.
 @ref[The unmarshalling documentation](../../../common/unmarshalling.md#http-unmarshalling-java) explains this process in detail.
 This directive simplifies extraction and error handling to the specified type from the request.
 
@@ -24,7 +24,7 @@ are mapped to rejections:
 
 ## Examples
 
-The following example uses @ref[Json Support via Jackson](../../../common/json-support.md#json-jackson-support-java) to unmarshall a json request into a simple `Person`  
+The following example uses @ref[Json Support via Jackson](../../../common/json-support.md#json-jackson-support-java) to unmarshall a json request into a simple `Person`
 
 @@snip [MarshallingDirectivesExamplesTest.java](../../../../../../../test/java/docs/http/javadsl/server/directives/MarshallingDirectivesExamplesTest.java) { #person }
 

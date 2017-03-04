@@ -28,7 +28,7 @@ The default renderer is `akka.http.scaladsl.server.directives.FileAndResourceDir
 and renders a listing which looks like this:
 
 ![akka-http-file-listing.png](../../../akka-http-file-listing.png)
-> 
+>
 Example page rendered by the `defaultDirectoryRenderer`.
 
 It's possible to turn off rendering the footer stating which version of Akka HTTP is rendering this page by configuring

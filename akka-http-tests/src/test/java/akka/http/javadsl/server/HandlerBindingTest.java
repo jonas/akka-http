@@ -13,7 +13,7 @@ import akka.http.javadsl.testkit.TestRouteResult;
 import akka.http.scaladsl.model.HttpRequest;
 
 public class HandlerBindingTest extends JUnitRouteTest {
-    
+
     @Test
     public void testHandlerWithoutExtractions() {
         Route route = complete("Ok");
@@ -34,7 +34,7 @@ public class HandlerBindingTest extends JUnitRouteTest {
         response.assertStatusCode(200);
         response.assertEntity("Sum: 65");
     }
-    
+
     public Route sum(int a, int b, int c, int d) {
         return complete("Sum: " + (a + b + c + d));
     }

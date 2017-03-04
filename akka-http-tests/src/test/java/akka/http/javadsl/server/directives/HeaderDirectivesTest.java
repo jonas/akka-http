@@ -205,7 +205,7 @@ public class HeaderDirectivesTest extends JUnitRouteTest {
       .run(HttpRequest.create().addHeader(Origin.create(invalidOriginHeader)))
       .assertStatusCode(StatusCodes.FORBIDDEN);
   }
-  
+
   @Test
   public void testCheckSameOriginGivenALL() {
     final HttpOrigin validOriginHeader = HttpOrigin.create("http://localhost", Host.create("8080"));

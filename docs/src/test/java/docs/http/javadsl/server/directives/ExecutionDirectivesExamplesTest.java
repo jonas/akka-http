@@ -72,7 +72,7 @@ public class ExecutionDirectivesExamplesTest extends JUnitRouteTest {
       .assertEntity("This didn't work.");
     //#handleRejections
   }
-  
+
   @Test
     public void testHandleRejectionsWithDefails() {
       //#handleNotFoundWithDefails
@@ -83,8 +83,8 @@ public class ExecutionDirectivesExamplesTest extends JUnitRouteTest {
           )
         )
         .build();
-  
-      final Route route = 
+
+      final Route route =
         handleRejections(totallyMissingHandler, () ->
         pathPrefix("handled", () ->
           route(
@@ -92,7 +92,7 @@ public class ExecutionDirectivesExamplesTest extends JUnitRouteTest {
           )
         )
       );
-  
+
       // tests:
       testRoute(route).run(HttpRequest.GET("/handled/existing"))
         .assertEntity("This path exists");

@@ -10,7 +10,7 @@ with the respective `HttpResponse` instance.
 Completing the request will send the response "back up" the route structure where all the logic runs that wrapping
 directives have potentially chained into the `RouteResult` future transformation chain.
 
-Please note that the `complete` directive has multiple variants, like 
+Please note that the `complete` directive has multiple variants, like
 
 ## Example
 

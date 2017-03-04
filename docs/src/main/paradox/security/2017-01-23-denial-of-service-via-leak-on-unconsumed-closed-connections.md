@@ -6,8 +6,8 @@
 
 ## Description of Vulnerability
 
-For requests containing request bodies (including request methods which would normally include entities like GET requests), 
-a mistake in completion handling of a connection could lead to memory leaking after the connection had been closed before the 
+For requests containing request bodies (including request methods which would normally include entities like GET requests),
+a mistake in completion handling of a connection could lead to memory leaking after the connection had been closed before the
 entity was consumed. This may eventually lead to a failure of the system due to being out of memory.
 
 Please subscribe to the [akka-security](https://groups.google.com/forum/#!forum/akka-security) mailing list to be notified promptly about future security issues.
@@ -23,12 +23,12 @@ The [CVSS](https://en.wikipedia.org/wiki/CVSS) score of this vulnerability is 6.
 
 ## Fixed Versions
 
-We have prepared patches for the affected versions, and have released the following versions which resolve the issue: 
+We have prepared patches for the affected versions, and have released the following versions which resolve the issue:
 
 - Akka HTTP `2.4.11.1` (Scala 2.11)
 - Akka HTTP `10.0.2` (Scala 2.11, 2.12)
 
-The patched releases contain no other changes except the single patch that addresses the memory leak vulnerability. 
+The patched releases contain no other changes except the single patch that addresses the memory leak vulnerability.
 *Binary and source compatibility has been maintained so the upgrade procedure is as simple as changing the library dependency.*
 
 ## Additional Important Information

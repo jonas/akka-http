@@ -236,9 +236,9 @@ fully satisfy your needs you can also easily create @ref[Custom Directives](cust
 
 ## Automatic Tuple extraction (flattening)
 
-Convenient Scala DSL syntax described in @ref[Basics](#basics), and @ref[Composing Directives](#composing-directives) 
+Convenient Scala DSL syntax described in @ref[Basics](#basics), and @ref[Composing Directives](#composing-directives)
 are made possible by Tuple extraction internally. Let's see how this works with examples.
- 
+
 ```scala
 val futureOfInt: Future[Int] = Future.successful(1)
 val route =

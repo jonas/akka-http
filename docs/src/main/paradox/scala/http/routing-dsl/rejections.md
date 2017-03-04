@@ -129,7 +129,7 @@ however you'd like to wrap those responses in JSON or some other content type.
 Please note that since those are not 200 responses, a different content type than the one that was sent in
 a client's ``Accept`` header *is* legal. Thus the default handler renders such rejections as ``text/plain``.
 
-In order to customise the HTTP Responses of an existing handler you can call the 
+In order to customise the HTTP Responses of an existing handler you can call the
 ``mapRejectionResponse`` method on such handler as shown in the example below:
 
 @@snip [RejectionHandlerExamplesSpec.scala](../../../../../test/scala/docs/http/scaladsl/server/RejectionHandlerExamplesSpec.scala) { #example-json }
@@ -137,7 +137,7 @@ In order to customise the HTTP Responses of an existing handler you can call the
 #### Adding the unmatched route in handleNotFound
 
 Since rejection handlers are routes themselves, it is possible to do anything you could possibly want inside such handler.
-For example you may want to include the path which was not found in the response to the client, this is as simple as 
+For example you may want to include the path which was not found in the response to the client, this is as simple as
 using the `extractUnmatchedPath` and completing the route with it.
 
 @@snip [RejectionHandlerExamplesSpec.scala](../../../../../test/scala/docs/http/scaladsl/server/RejectionHandlerExamplesSpec.scala) { #not-found-with-path }

@@ -105,7 +105,7 @@ This way the priority between rejections is properly defined via the order of yo
 Once you have defined your custom `RejectionHandler` you have two options for "activating" it:
 
  1. Pass it to the `seal()` method of the `Route` class
- 2. Supply it as an argument to the @ref[handleRejections](directives/execution-directives/handleRejections.md#handlerejections-java) directive 
+ 2. Supply it as an argument to the @ref[handleRejections](directives/execution-directives/handleRejections.md#handlerejections-java) directive
 
 In the first case your handler will be "sealed" (which means that it will receive the default handler as a fallback for
 all cases your handler doesn't handle itself) and used for all rejections that are not handled within the route structure
@@ -122,7 +122,7 @@ however you'd like to wrap those responses in JSON or some other content type.
 Please note that since those are not 200 responses, a different content type than the one that was sent in
 a client's `Accept` header *is* legal. Thus the default handler renders such rejections as `text/plain`.
 
-In order to customise the HTTP Responses of an existing handler you can call the 
+In order to customise the HTTP Responses of an existing handler you can call the
 `mapRejectionResponse` method on such handler as shown in the example below:
 
 @@snip [RejectionHandlerExamplesTest.java](../../../../../test/java/docs/http/javadsl/server/RejectionHandlerExamplesTest.java) { #example-json }
@@ -130,7 +130,7 @@ In order to customise the HTTP Responses of an existing handler you can call the
 #### Adding the unmatched route in handleNotFound
 
 Since rejection handlers are routes themselves, it is possible to do anything you could possibly want inside such handler.
-For example you may want to include the path which was not found in the response to the client, this is as simple as 
+For example you may want to include the path which was not found in the response to the client, this is as simple as
 using the `extractUnmatchedPath` and completing the route with it.
 
 @@snip [ExecutionDirectivesExamplesTest.java](../../../../../test/java/docs/http/javadsl/server/directives/ExecutionDirectivesExamplesTest.java) { #handleNotFoundWithDefails }

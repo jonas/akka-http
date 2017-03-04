@@ -108,7 +108,7 @@ public interface Multipart {
 
         interface Strict extends Multipart.General, Multipart.Strict {
             Source<Multipart.General.BodyPart.Strict, Object> getParts();
-            
+
             Iterable<? extends Multipart.General.BodyPart.Strict> getStrictParts();
         }
 

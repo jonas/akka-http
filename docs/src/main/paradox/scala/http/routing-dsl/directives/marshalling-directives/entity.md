@@ -13,7 +13,7 @@ The `entity` method will either pass the `value` to the inner route or map the `
 `akka.http.scaladsl.server.Rejection`.
 
 The `entity` directive works in conjunction with `as` and `akka.http.scaladsl.unmarshalling` to
-convert some serialized "wire format" value into a higher-level object structure.  
+convert some serialized "wire format" value into a higher-level object structure.
 @ref[The unmarshalling documentation](../../../common/unmarshalling.md#http-unmarshalling-scala) explains this process in detail.
 This directive simplifies extraction and error handling to the specified type from the request.
 
@@ -28,7 +28,7 @@ are mapped to rejections:
 
 ## Examples
 
-The following example uses `spray-json` to unmarshall a json request into a simple `Person` 
+The following example uses `spray-json` to unmarshall a json request into a simple `Person`
 class.  It utilizes `SprayJsonSupport` via the `PersonJsonSupport` object as the in-scope unmarshaller.
 
 @@snip [MarshallingDirectivesExamplesSpec.scala](../../../../../../../test/scala/docs/http/scaladsl/server/directives/MarshallingDirectivesExamplesSpec.scala) { #person-case-class }

@@ -36,13 +36,13 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
     path(segment("foo").slash(), () -> complete(StatusCodes.OK));
 
     // matches e.g. /foo/123 and extracts "123" as a String
-    path(segment("foo").slash(segment(compile("\\d+"))), (value) -> 
+    path(segment("foo").slash(segment(compile("\\d+"))), (value) ->
         complete(StatusCodes.OK));
 
     // matches e.g. /foo/bar123 and extracts "123" as a String
-    path(segment("foo").slash(segment(compile("bar(\\d+)"))), (value) -> 
+    path(segment("foo").slash(segment(compile("bar(\\d+)"))), (value) ->
         complete(StatusCodes.OK));
-    
+
     // similar to `path(Segments)`
     path(neutral().repeat(0, 10), () -> complete(StatusCodes.OK));
 
@@ -54,7 +54,7 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testBasicExamples() {
     path("test", () -> complete(StatusCodes.OK));
-     
+
     // matches "/test", as well
     path(segment("test"), () -> complete(StatusCodes.OK));
 
@@ -63,14 +63,14 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathExample() {
     //#pathPrefix
-    final Route route = 
+    final Route route =
         route(
             path("foo", () -> complete("/foo")),
             path(segment("foo").slash("bar"), () -> complete("/foo/bar")),
-            pathPrefix("ball", () -> 
+            pathPrefix("ball", () ->
                 route(
                     pathEnd(() -> complete("/ball")),
-                    path(integerSegment(), (i) -> 
+                    path(integerSegment(), (i) ->
                         complete((i % 2 == 0) ? "even ball" : "odd ball"))
                 )
             )
@@ -87,9 +87,9 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathEnd() {
     //#path-end
-    final Route route = 
+    final Route route =
         route(
-            pathPrefix("foo", () -> 
+            pathPrefix("foo", () ->
                 route(
                     pathEnd(() -> complete("/foo")),
                     path("bar", () -> complete("/foo/bar"))
@@ -107,9 +107,9 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathEndOrSingleSlash() {
     //#path-end-or-single-slash
-    final Route route = 
+    final Route route =
         route(
-            pathPrefix("foo", () -> 
+            pathPrefix("foo", () ->
                 route(
                     pathEndOrSingleSlash(() -> complete("/foo")),
                     path("bar", () -> complete("/foo/bar"))
@@ -126,12 +126,12 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathPrefix() {
     //#path-prefix
-    final Route route = 
+    final Route route =
         route(
-            pathPrefix("ball", () -> 
+            pathPrefix("ball", () ->
                 route(
                     pathEnd(() -> complete("/ball")),
-                    path(integerSegment(), (i) -> 
+                    path(integerSegment(), (i) ->
                         complete((i % 2 == 0) ? "even ball" : "odd ball"))
                 )
             )
@@ -146,7 +146,7 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathPrefixTest() {
     //#path-prefix-test
-    final Route route = 
+    final Route route =
         route(
             pathPrefixTest(segment("foo").orElse("bar"), () ->
                 route(
@@ -164,10 +164,10 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathSingleSlash() {
     //#path-single-slash
-    final Route route = 
+    final Route route =
         route(
             pathSingleSlash(() -> complete("root")),
-            pathPrefix("ball", () -> 
+            pathPrefix("ball", () ->
                 route(
                     pathSingleSlash(() -> complete("/ball/")),
                     path(integerSegment(), (i) -> complete((i % 2 == 0) ? "even ball" : "odd ball"))
@@ -185,12 +185,12 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathSuffix() {
     //#path-suffix
-    final Route route = 
+    final Route route =
         route(
-            pathPrefix("start", () -> 
+            pathPrefix("start", () ->
                 route(
                     pathSuffix("end", () -> completeWithUnmatchedPath.get()),
-                    pathSuffix(segment("foo").slash("bar").concat("baz"), () -> 
+                    pathSuffix(segment("foo").slash("bar").concat("baz"), () ->
                         completeWithUnmatchedPath.get())
                 )
             )
@@ -204,7 +204,7 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testPathSuffixTest() {
     //#path-suffix-test
-    final Route route = 
+    final Route route =
         route(
             pathSuffixTest(slash(), () -> complete("slashed")),
             complete("unslashed")
@@ -218,7 +218,7 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testRawPathPrefix() {
     //#raw-path-prefix
-    final Route route = 
+    final Route route =
         route(
             pathPrefix("foo", () ->
                 route(
@@ -236,7 +236,7 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testRawPathPrefixTest() {
     //#raw-path-prefix-test
-    final Route route = 
+    final Route route =
         route(
             pathPrefix("foo", () ->
                 rawPathPrefixTest("bar", () -> completeWithUnmatchedPath.get())
@@ -251,18 +251,18 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testRedirectToNoTrailingSlashIfMissing() {
     //#redirect-notrailing-slash-missing
-    final Route route = 
+    final Route route =
         redirectToTrailingSlashIfMissing(
             StatusCodes.MOVED_PERMANENTLY, () ->
             route(
                 path(segment("foo").slash(), () -> complete("OK")),
-                path(segment("bad-1"), () -> 
+                path(segment("bad-1"), () ->
                     // MISTAKE!
                     // Missing `/` in path, causes this path to never match,
                     // because it is inside a `redirectToTrailingSlashIfMissing`
                     complete(StatusCodes.NOT_IMPLEMENTED)
                 ),
-                path(segment("bad-2").slash(), () -> 
+                path(segment("bad-2").slash(), () ->
                     // MISTAKE!
                     // / should be explicit as path element separator and not *in* the path element
                     // So it should be: "bad-1" /
@@ -288,12 +288,12 @@ public class PathDirectivesExamplesTest extends JUnitRouteTest {
   @Test
   public void testRedirectToNoTrailingSlashIfPresent() {
     //#redirect-notrailing-slash-present
-    final Route route = 
+    final Route route =
         redirectToNoTrailingSlashIfPresent(
             StatusCodes.MOVED_PERMANENTLY, () ->
             route(
                 path("foo", () -> complete("OK")),
-                path(segment("bad").slash(), () -> 
+                path(segment("bad").slash(), () ->
                     // MISTAKE!
                     // Since inside a `redirectToNoTrailingSlashIfPresent` directive
                     // the matched path here will never contain a trailing slash,

@@ -5,15 +5,15 @@ import akka.japi.pf.PFBuilder;
 
 public class ExceptionHandlerBuilder {
     private final PFBuilder<Throwable, Route> delegate;
-    
+
     public ExceptionHandlerBuilder() {
         this(new PFBuilder<>());
     }
-    
+
     private ExceptionHandlerBuilder(PFBuilder<Throwable, Route> delegate) {
         this.delegate = delegate;
     }
-    
+
     /**
      * Add a new case statement to this builder.
      *
@@ -40,7 +40,7 @@ public class ExceptionHandlerBuilder {
         delegate.match(type, predicate, apply);
         return this;
     }
-    
+
     /**
      * Add a new case statement to this builder.
      *
@@ -53,7 +53,7 @@ public class ExceptionHandlerBuilder {
         delegate.matchEquals(object, apply);
         return this;
     }
-    
+
     /**
      * Add a new case statement to this builder, that matches any argument.
      *
@@ -64,7 +64,7 @@ public class ExceptionHandlerBuilder {
         delegate.matchAny(apply);
         return this;
     }
-    
+
     public ExceptionHandler build() {
         return ExceptionHandler.of(delegate.build());
     }

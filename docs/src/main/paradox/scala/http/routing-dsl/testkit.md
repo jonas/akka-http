@@ -87,7 +87,7 @@ You do this by wrapping your route with the `akka.http.scaladsl.server.Route.sea
 and translates them to the respective `HttpResponse`.
 
 Note that explicit call on the `akka.http.scaladsl.server.Route.seal` method is needed in test code, but in your application code it is not necessary.
-As described in @ref[Sealing a Route](routes.md#sealing-a-route), your application code only needs to bring 
+As described in @ref[Sealing a Route](routes.md#sealing-a-route), your application code only needs to bring
 implicit rejection and exception handlers in scope.
 
 ## Testing Route fragments

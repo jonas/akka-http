@@ -27,13 +27,13 @@ public class PetStoreExample {
       pets.put(thePet.getId(), thePet);
       return complete(StatusCodes.OK, thePet, Jackson.<Pet>marshaller());
   }
-  
+
   private static Route alternativeFuturePutPetHandler(Map<Integer, Pet> pets, Pet thePet) {
       pets.put(thePet.getId(), thePet);
     CompletableFuture<Pet> futurePet = CompletableFuture.supplyAsync(() -> thePet);
       return completeOKWithFuture(futurePet, Jackson.<Pet>marshaller());
   }
-    
+
   public static Route appRoute(final Map<Integer, Pet> pets) {
     PetStoreController controller = new PetStoreController(pets);
 
@@ -42,14 +42,14 @@ public class PetStoreExample {
         Pet pet = pets.get(petId);
         return (pet == null) ? reject() : complete(StatusCodes.OK, pet, Jackson.<Pet>marshaller());
     };
-      
+
     // The directives here are statically imported, but you can also inherit from AllDirectives.
     return
       route(
         path("", () ->
           getFromResource("web/index.html")
         ),
-        pathPrefix("pet", () -> 
+        pathPrefix("pet", () ->
           path(INTEGER, petId -> route(
             // demonstrates different ways of handling requests:
 
@@ -57,20 +57,20 @@ public class PetStoreExample {
             get(() -> existingPet.apply(petId)),
 
             // 2. using a method
-            put(() -> 
-              entity(Jackson.unmarshaller(Pet.class), thePet -> 
+            put(() ->
+              entity(Jackson.unmarshaller(Pet.class), thePet ->
                 putPetHandler(pets, thePet)
               )
             ),
             // 2.1. using a method, and internally handling a Future value
             path("alternate", () ->
-              put(() -> 
-                entity(Jackson.unmarshaller(Pet.class), thePet -> 
+              put(() ->
+                entity(Jackson.unmarshaller(Pet.class), thePet ->
                   putPetHandler(pets, thePet)
                 )
-              )              
+              )
             ),
-            
+
             // 3. calling a method of a controller instance
             delete(() -> controller.deletePet(petId))
           ))

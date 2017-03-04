@@ -216,24 +216,24 @@ public class HttpServerExampleDocTest {
   public static void main(String[] args) throws Exception {
     fullServerExample();
   }
-  
+
 
   static class ConsumeEntityUsingEntityDirective {
     //#consume-entity-directive
     class Bid {
       final String userId;
       final int bid;
- 
+
       Bid(String userId, int bid) {
         this.userId = userId;
-        this.bid = bid; 
+        this.bid = bid;
       }
     }
 
     final ActorSystem system = ActorSystem.create();
     final ExecutionContextExecutor dispatcher = system.dispatcher();
     final ActorMaterializer materializer = ActorMaterializer.create(system);
-    
+
     final Unmarshaller<HttpEntity, Bid> asBid = Jackson.unmarshaller(Bid.class);
 
     final Route s = path("bid", () ->
@@ -246,7 +246,7 @@ public class HttpServerExampleDocTest {
     );
     //#consume-entity-directive
   }
-      
+
   void consumeEntityUsingRawDataBytes() {
     //#consume-raw-dataBytes
     final ActorSystem system = ActorSystem.create();
@@ -270,7 +270,7 @@ public class HttpServerExampleDocTest {
 
     //#consume-raw-dataBytes
   }
-      
+
   void discardEntityUsingRawBytes() {
     //#discard-discardEntityBytes
     final ActorSystem system = ActorSystem.create();
@@ -293,7 +293,7 @@ public class HttpServerExampleDocTest {
       );
     //#discard-discardEntityBytes
   }
-      
+
   void discardEntityManuallyCloseConnections() {
         //#discard-close-connections
     final ActorSystem system = ActorSystem.create();
@@ -312,7 +312,7 @@ public class HttpServerExampleDocTest {
               // Closing connections, method 2 (graceful):
               // consider draining connection and replying with `Connection: Close` header
               // if you want the client to close after this request/reply cycle instead:
-              return respondWithHeader(Connection.create("close"), () -> 
+              return respondWithHeader(Connection.create("close"), () ->
                 complete(StatusCodes.FORBIDDEN, "Not allowed!")
               );
             })
@@ -321,6 +321,6 @@ public class HttpServerExampleDocTest {
       );
         //#discard-close-connections
       }
-    
-  
+
+
 }

@@ -32,7 +32,7 @@ import akka.http.javadsl.model.ws.WebSocket;
 
 @SuppressWarnings("Convert2MethodRef")
 public class WebSocketCoreExample {
-  
+
   //#websocket-handling
   public static HttpResponse handleRequest(HttpRequest request) {
     System.out.println("Handling request to " + request.getUri());

@@ -56,11 +56,11 @@ named after HTTP methods to create a request with a given method and URI directl
 <a id="synthetic-headers-java"></a>
 ### Synthetic Headers
 
-In some cases it may be necessary to deviate from fully RFC-Compliant behavior. For instance, Amazon S3 treats 
+In some cases it may be necessary to deviate from fully RFC-Compliant behavior. For instance, Amazon S3 treats
 the `+` character in the path part of the URL as a space, even though the RFC specifies that this behavior should
 be limited exclusively to the query portion of the URI.
 
-In order to work around these types of edge cases, Akka HTTP provides for the ability to provide extra, 
+In order to work around these types of edge cases, Akka HTTP provides for the ability to provide extra,
 non-standard information to the request via synthetic headers. These headers are not passed to the client
 but are instead consumed by the request engine and used to override default behavior.
 

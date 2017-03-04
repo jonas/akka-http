@@ -16,7 +16,7 @@ Akka HTTP already pre-defines a large number of directives and you can easily co
 
 ## Basics
 
-@ref[Routes](../routes.md#routes-java) effectively are simply highly specialised functions that take a `RequestContext` and eventually `complete` it, 
+@ref[Routes](../routes.md#routes-java) effectively are simply highly specialised functions that take a `RequestContext` and eventually `complete` it,
 which could (and often should) happen asynchronously.
 
 With the @ref[complete](route-directives/complete.md#complete-java) directive this becomes even shorter:
@@ -100,7 +100,7 @@ Instead of extracting the composed directives to its own method, we can also use
 
 @@snip [DirectiveExamplesTest.java](../../../../../../test/java/docs/http/javadsl/server/DirectiveExamplesTest.java) { #getOrPutUsingAnyOf }
 
-The previous example, tries to complete the route first with a `GET` or with a `PUT` if the first one was rejected. 
+The previous example, tries to complete the route first with a `GET` or with a `PUT` if the first one was rejected.
 
 In case you are constantly nesting the same directives several times in you code, you could factor them out in their own method and use it everywhere:
 
@@ -119,7 +119,7 @@ As you have already seen in the previous section, you can also use the `route` m
 @@snip [DirectiveExamplesTest.java](../../../../../../test/java/docs/http/javadsl/server/DirectiveExamplesTest.java) { #usingRoute }
 
 The `route` combinator comes handy when you want to avoid nesting. Here you can see an illustrative example:
- 
+
 @@snip [DirectiveExamplesTest.java](../../../../../../test/java/docs/http/javadsl/server/DirectiveExamplesTest.java) { #usingRouteBig }
 
 Notice how you could adjust the indentation in these last two examples to have a more readable code.
@@ -151,7 +151,7 @@ anyOf(bindParameter(this::parameter, "foo"), bindParameter(this::parameter, "bar
 In this previous example we make use of the `bindParameter` function located in `akka-http/akka.http.javadsl.common.PartialApplication`.
 In order to be able to call `anyOf`, we need to convert our directive that takes 2 parameters to a function that takes only 1.
 In this particular case we want to use the `parameter` directive that takes a `String` and a function from `String` to `Route`,
-so to be able to use it in combination with `anyOf`, we need to bind the first parameter to `foo` and to `bar` in the second one. `bindParameter(this::parameter, "foo")` is equivalent 
+so to be able to use it in combination with `anyOf`, we need to bind the first parameter to `foo` and to `bar` in the second one. `bindParameter(this::parameter, "foo")` is equivalent
 to define your own function like this:
 ```java
 Route parameterFoo(Function<String, Route> inner) {
@@ -162,7 +162,7 @@ Route parameterFoo(Function<String, Route> inner) {
 When you combine directives producing extractions with the `allOf` method all extractions will be properly gathered up:
 
 ```java
-allOf(this::extractScheme, this::extractMethod, (scheme, method) -> ...) 
+allOf(this::extractScheme, this::extractMethod, (scheme, method) -> ...)
 ```
 
 Directives offer a great way of constructing your web service logic from small building blocks in a plug and play

@@ -1,7 +1,7 @@
 <a id="overridemethodwithparameter-java"></a>
 # overrideMethodWithParameter
 
-Changes the HTTP method of the request to the value of the specified query string parameter. 
+Changes the HTTP method of the request to the value of the specified query string parameter.
 
 ## Description
 

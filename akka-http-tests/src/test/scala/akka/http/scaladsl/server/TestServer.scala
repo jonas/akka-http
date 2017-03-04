@@ -68,14 +68,14 @@ object TestServer extends App {
       path("tweet") {
         complete(Tweet("Hello, world!"))
       } ~
-      (path("tweets") & parameter('n.as[Int])) { n => 
+      (path("tweets") & parameter('n.as[Int])) { n =>
         get {
           val tweets = Source.repeat(Tweet("Hello, world!")).take(n)
           complete(tweets)
         } ~
         post {
           entity(asSourceOf[Tweet]) { tweets ⇒
-            onComplete(tweets.runFold(0)({ case (acc, t) => acc + 1 })) { count => 
+            onComplete(tweets.runFold(0)({ case (acc, t) => acc + 1 })) { count =>
               complete(s"Total tweets received: " + count)
             }
           }
@@ -83,13 +83,13 @@ object TestServer extends App {
         put {
           // checking the alternative syntax also works:
           entity(as[Source[Tweet, NotUsed]]) { tweets ⇒
-            onComplete(tweets.runFold(0)({ case (acc, t) => acc + 1 })) { count => 
+            onComplete(tweets.runFold(0)({ case (acc, t) => acc + 1 })) { count =>
               complete(s"Total tweets received: " + count)
             }
           }
         }
       }
-    } ~ 
+    } ~
     pathPrefix("inner")(getFromResourceDirectory("someDir"))
   }
   // format: ON

@@ -237,7 +237,7 @@ class Http2ServerDemux extends GraphStage[BidiShape[Http2SubStream, FrameEvent, 
             case e: ParsingException ⇒
               e.getCause match {
                 case null  ⇒ super.onUpstreamFailure(e) // fail with the raw parsing exception
-                case cause ⇒ onUpstreamFailure(cause) // unwrap the cause, which should carry ComplianceException and recurse 
+                case cause ⇒ onUpstreamFailure(cause) // unwrap the cause, which should carry ComplianceException and recurse
               }
 
             // handle every unhandled exception

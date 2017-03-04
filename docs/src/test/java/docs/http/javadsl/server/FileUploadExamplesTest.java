@@ -38,7 +38,7 @@ public class FileUploadExamplesTest extends JUnitRouteTest {
 
   Route uploadVideo() {
     final Materializer materializer = null;
-    return 
+    return
     //#simple-upload
       path("video", () ->
       entity(Unmarshaller.entityToMultipartFormData(), formData -> {

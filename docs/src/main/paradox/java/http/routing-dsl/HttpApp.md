@@ -63,7 +63,7 @@ This following example shows how to override the default termination signal:
 
 @@snip [HttpAppExampleTest.java](../../../../../test/java/docs/http/javadsl/server/HttpAppExampleTest.java) { #imports #selfClosing #serverTerminationSignal }
 
-Here the termination signal is defined by a future that will be automatically completed after 5 seconds. 
+Here the termination signal is defined by a future that will be automatically completed after 5 seconds.
 
 ## Getting Notified on Server Shutdown
 

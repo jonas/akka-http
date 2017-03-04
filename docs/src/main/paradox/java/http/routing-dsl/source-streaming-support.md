@@ -3,9 +3,9 @@
 # Source Streaming
 
 Akka HTTP supports completing a request with an Akka `Source<T, ?>`, which makes it possible to easily build
-and consume streaming end-to-end APIs which apply back-pressure throughout the entire stack. 
+and consume streaming end-to-end APIs which apply back-pressure throughout the entire stack.
 
-It is possible to complete requests with raw `Source<ByteString, ?>`, however often it is more convenient to 
+It is possible to complete requests with raw `Source<ByteString, ?>`, however often it is more convenient to
 stream on an element-by-element basis, and allow Akka HTTP to handle the rendering internally - for example as a JSON array,
 or CSV stream (where each element is separated by a new-line).
 
@@ -36,7 +36,7 @@ First we enable JSON Streaming by making an implicit `EntityStreamingSupport` in
 The default mode of rendering a `Source` is to represent it as an JSON Array. If you want to change this representation
 for example to use Twitter style new-line separated JSON objects, you can do so by configuring the support trait accordingly.
 
-In Step 1.1. we demonstrate how to configure the rendering to be new-line separated, and also how parallel marshalling 
+In Step 1.1. we demonstrate how to configure the rendering to be new-line separated, and also how parallel marshalling
 can be applied. We configure the Support object to render the JSON as series of new-line separated JSON objects,
 simply by providing the `start`, `sep` and `end` ByteStrings, which will be emitted at the appropriate
 places in the rendered stream. Although this format is *not* valid JSON, it is pretty popular since parsing it is relatively

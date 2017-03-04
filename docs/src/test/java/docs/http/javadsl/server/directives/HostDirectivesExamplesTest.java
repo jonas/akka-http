@@ -47,7 +47,7 @@ public class HostDirectivesExamplesTest extends JUnitRouteTest {
   public void testExtractHost() {
     //#extractHostname
 
-    final Route route = extractHost(hn -> 
+    final Route route = extractHost(hn ->
         complete("Hostname: " + hn));
 
     testRoute(route).run(HttpRequest.GET("/").addHeader(Host.create("company.com", 9090)))
@@ -59,7 +59,7 @@ public class HostDirectivesExamplesTest extends JUnitRouteTest {
   public void testMatchAndExtractHost() {
     //#matchAndExtractHost
 
-    final Route hostPrefixRoute = host(Pattern.compile("api|rest"), prefix -> 
+    final Route hostPrefixRoute = host(Pattern.compile("api|rest"), prefix ->
         complete("Extracted prefix: " + prefix));
 
     final Route hostPartRoute = host(Pattern.compile("public.(my|your)company.com"), captured ->

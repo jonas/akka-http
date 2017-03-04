@@ -17,7 +17,7 @@ public class PetStoreController {
     public PetStoreController(Map<Integer, Pet> dataStore) {
         this.dataStore = dataStore;
     }
-    
+
     public Route deletePet(int petId) {
         dataStore.remove(petId);
         return complete(StatusCodes.OK);

@@ -68,14 +68,14 @@ public class JavaTestServer extends AllDirectives { // or import static Directiv
 
     final Unmarshaller<ByteString, JavaTweet> JavaTweets = Jackson.byteStringUnmarshaller(JavaTweet.class);
     final Route tweets = path("tweets", () ->
-      get(() -> 
+      get(() ->
         parameter(StringUnmarshallers.INTEGER, "n", n -> {
           final Source<JavaTweet, NotUsed> tws = Source.repeat(new JavaTweet("Hello World!")).take(n);
           return completeOKWithSource(tws, Jackson.marshaller(), EntityStreamingSupport.json());
         })
       ).orElse(
       post(() ->
-        extractMaterializer(mat -> 
+        extractMaterializer(mat ->
           entityAsSourceOf(JavaTweets, null, sourceOfTweets -> {
             final CompletionStage<Integer> tweetsCount = sourceOfTweets.runFold(0, (acc, tweet) -> acc + 1, mat);
             return onComplete(tweetsCount, c -> complete("Total number of tweets: " + c));
@@ -83,7 +83,7 @@ public class JavaTestServer extends AllDirectives { // or import static Directiv
         )
       ))
     );
-    
+
     final Route inner = path("inner", () ->
       getFromResourceDirectory("someDir")
     );
@@ -161,7 +161,7 @@ public class JavaTestServer extends AllDirectives { // or import static Directiv
       }
     });
   }
-  
+
   private static final class JavaTweet {
     private String message;
 
@@ -176,6 +176,6 @@ public class JavaTestServer extends AllDirectives { // or import static Directiv
     public String getMessage() {
       return message;
     }
-    
+
   }
 }

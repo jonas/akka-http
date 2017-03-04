@@ -11,7 +11,7 @@ import scala.util.matching.Regex;
 
 public final class RegexConverters {
     private static final Seq<String> empty = new VectorBuilder<String>().result();
-    
+
     /**
      * Converts the given Java Pattern into a scala Regex, without recompiling it.
      */

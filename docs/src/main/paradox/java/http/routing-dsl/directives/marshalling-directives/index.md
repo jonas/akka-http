@@ -7,7 +7,7 @@ a request entity to a specific type or a type to a response.
 See @ref[marshalling](../../../common/marshalling.md#http-marshalling-java) and @ref[unmarshalling](../../../common/unmarshalling.md#http-unmarshalling-java) for specific
 serialization (also known as pickling) guidance.
 
-Marshalling directives usually rely on an in-scope implicit marshaller to handle conversion.  
+Marshalling directives usually rely on an in-scope implicit marshaller to handle conversion.
 
 @@toc { depth=1 }
 

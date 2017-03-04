@@ -278,8 +278,8 @@ object MediaTypes extends ObjectRegistry[(String, String), MediaType] {
     register(mediaType.mainType.toRootLowerCase → mediaType.subType.toRootLowerCase, mediaType)
   }
 
-  import MediaType._  
-  
+  import MediaType._
+
   /////////////////////////// PREDEFINED MEDIA-TYPE DEFINITION ////////////////////////////
   // format: OFF
 

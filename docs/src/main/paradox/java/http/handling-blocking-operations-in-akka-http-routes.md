@@ -9,9 +9,9 @@ lead to problems. It is important to handle the blocking operations correctly.
 
 Using `context.dispatcher()` as the dispatcher on which the blocking Future
 executes can be a problem - the same dispatcher is used by the routing
-infrastructure to actually handle the incoming requests. 
+infrastructure to actually handle the incoming requests.
 
-If all of the available threads are blocked, the routing infrastructure will end up *starving*. 
+If all of the available threads are blocked, the routing infrastructure will end up *starving*.
 Therefore, routing infrastructure should not be blocked. Instead, a dedicated dispatcher
 for blocking operations should be used.
 
@@ -35,8 +35,8 @@ In the thread state diagrams below the colours have the following meaning:
  * Orange - Waiting state
  * Green - Runnable state
 
-The thread information was recorded using the YourKit profiler, however any good JVM profiler 
-has this feature (including the free and bundled with the Oracle JDK VisualVM, as well as Oracle Flight Recorder). 
+The thread information was recorded using the YourKit profiler, however any good JVM profiler
+has this feature (including the free and bundled with the Oracle JDK VisualVM, as well as Oracle Flight Recorder).
 
 ### Problem example: blocking the default dispatcher
 
@@ -50,12 +50,12 @@ they're ready to accept new work. However, large amounts of Turquoise (sleeping)
 ![DispatcherBehaviourOnBadCode.png](DispatcherBehaviourOnBadCode.png)
 
 Since we're using the Java `CompletableFuture` in this example, the blocking will happen on its
-default pool which is the _global_ `ForkJoinPool.commonPool()`. With Scala Futures the in-scope 
-provided dispatcher would be used. Both these dispatchers are ForkJoin pools by default, and are 
+default pool which is the _global_ `ForkJoinPool.commonPool()`. With Scala Futures the in-scope
+provided dispatcher would be used. Both these dispatchers are ForkJoin pools by default, and are
 not best suited for blocking operations. For example, the above screenshot shows an Akka FJP dispatchers threads,
-named "`default-akka.default-dispatcher2,3,4`" going into the blocking state, after having been idle. 
-It can be observed that the number of new threads increases, "`default-akka.actor.default-dispatcher 18,19,20,...`" 
-however they go to sleep state immediately, thus wasting the resources. The same happens to the global `ForkJoinPool` 
+named "`default-akka.default-dispatcher2,3,4`" going into the blocking state, after having been idle.
+It can be observed that the number of new threads increases, "`default-akka.actor.default-dispatcher 18,19,20,...`"
+however they go to sleep state immediately, thus wasting the resources. The same happens to the global `ForkJoinPool`
 when using Java Futures.
 
 The number of such new threads depends on the default dispatcher configuration,
@@ -63,7 +63,7 @@ but it will likely not exceed 50. Since many POST requests are being processed, 
 thread pool is starved. The blocking operations dominate such that the routing
 infra has no thread available to handle the other requests.
 
-In essence, the `Thread.sleep()` operation has dominated all threads and caused anything 
+In essence, the `Thread.sleep()` operation has dominated all threads and caused anything
 executing on the default dispatcher to starve for resources (including any Actors
 that you have not configured an explicit dispatcher for).
 
@@ -118,5 +118,5 @@ This is the recommended way of dealing with any kind of blocking in reactive
 applications. It is referred to as "bulkheading" or "isolating" the bad behaving
 parts of an app. In this case, bad behaviour of blocking operations.
 
-There is good documentation available in Akka docs section, 
+There is good documentation available in Akka docs section,
 [Blocking needs careful management](http://doc.akka.io/docs/akka/current/general/actor-systems.html#Blocking_Needs_Careful_Management).

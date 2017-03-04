@@ -100,7 +100,7 @@ public class FutureDirectivesExamplesTest extends JUnitRouteTest {
       .assertEntity("There was an internal server error.");
     //#completeOrRecoverWith
   }
-  
+
   @Test
   public void testOnCompleteWithBreaker() throws InterruptedException {
     //#onCompleteWithBreaker
@@ -111,7 +111,7 @@ public class FutureDirectivesExamplesTest extends JUnitRouteTest {
     final FiniteDuration callTimeout = FiniteDuration.create(5, TimeUnit.SECONDS);
     final FiniteDuration resetTimeout = FiniteDuration.create(1, TimeUnit.SECONDS);
     final CircuitBreaker breaker = CircuitBreaker.create(system().scheduler(), maxFailures, callTimeout, resetTimeout);
-    
+
     final Route route = path(segment("divide").slash(integerSegment()).slash(integerSegment()),
       (a, b) -> onCompleteWithBreaker(breaker,
         () ->  CompletableFuture.supplyAsync(() -> a / b),
@@ -132,18 +132,18 @@ public class FutureDirectivesExamplesTest extends JUnitRouteTest {
     testRoute(route).run(HttpRequest.GET("/divide/10/0"))
       .assertStatusCode(StatusCodes.InternalServerError())
       .assertEntity("An error occurred: / by zero");
-    // opened the circuit-breaker 
-    
+    // opened the circuit-breaker
+
     testRoute(route).run(HttpRequest.GET("/divide/10/0"))
           .assertStatusCode(StatusCodes.ServiceUnavailable())
           .assertEntity("The server is currently unavailable (because it is overloaded or down for maintenance).");
 
     Thread.sleep(resetTimeout.toMillis() + 300);
     // circuit breaker resets after this time
-    
+
     testRoute(route).run(HttpRequest.GET("/divide/8/2"))
       .assertEntity("The result was 4");
-    
+
     //#onCompleteWithBreaker
   }
 

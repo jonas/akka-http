@@ -35,7 +35,7 @@ public class Jackson {
   public static <T> Unmarshaller<ByteString, T> byteStringUnmarshaller(Class<T> expectedType) {
     return byteStringUnmarshaller(defaultObjectMapper, expectedType);
   }
-  
+
   public static <T> Unmarshaller<HttpEntity, T> unmarshaller(Class<T> expectedType) {
     return unmarshaller(defaultObjectMapper, expectedType);
   }
@@ -44,7 +44,7 @@ public class Jackson {
     return Unmarshaller.forMediaType(MediaTypes.APPLICATION_JSON, Unmarshaller.entityToString())
                        .thenApply(s -> fromJSON(mapper, s, expectedType));
   }
-  
+
   public static <T> Unmarshaller<ByteString, T> byteStringUnmarshaller(ObjectMapper mapper, Class<T> expectedType) {
     return Unmarshaller.sync(s -> fromJSON(mapper, s.utf8String(), expectedType));
   }

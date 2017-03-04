@@ -68,10 +68,10 @@ trait FramedEntityStreamingDirectives extends MarshallingDirectives {
       if (support.supported.matches(entity.contentType)) {
         val bytes = entity.dataBytes
         val frames = bytes.via(support.framingDecoder)
-        val marshalling = 
+        val marshalling =
           if (support.unordered) Flow[ByteString].mapAsyncUnordered(support.parallelism)(bs => um(bs)(ec, mat))
           else Flow[ByteString].mapAsync(support.parallelism)(bs => um(bs)(ec, mat))
-        
+
         val elements = frames.viaMat(marshalling)(Keep.right)
         FastFuture.successful(elements)
 

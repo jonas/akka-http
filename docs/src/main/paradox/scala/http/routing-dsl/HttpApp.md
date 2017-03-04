@@ -49,7 +49,7 @@ In case you want to provide different settings, you can simply pass it to `start
 `HttpApp` creates its own `ActorSystem` instance when one is not provided.
 In case you already created an `ActorSystem` in your application you can
 pass it to `startServer` as illustrated in the following example:
- 
+
 @@snip [HttpAppExampleSpec.scala](../../../../../test/scala/docs/http/scaladsl/HttpAppExampleSpec.scala) { #with-actor-system }
 
 ## Overriding Termination Signal
@@ -63,7 +63,7 @@ This following example shows how to override the default termination signal:
 
 @@snip [HttpAppExampleSpec.scala](../../../../../test/scala/docs/http/scaladsl/HttpAppExampleSpec.scala) { #override-termination-signal }
 
-Here the termination signal is defined by a future that will be automatically completed after 5 seconds. 
+Here the termination signal is defined by a future that will be automatically completed after 5 seconds.
 
 ## Getting Notified on Server Shutdown
 

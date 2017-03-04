@@ -78,12 +78,12 @@ public class MiscDirectivesExamplesTest extends JUnitRouteTest {
 
     // tests:
     final String ip = "192.168.1.2";
-    final akka.http.javadsl.model.RemoteAddress remoteAddress = 
+    final akka.http.javadsl.model.RemoteAddress remoteAddress =
       akka.http.javadsl.model.RemoteAddress.create(InetAddress.getByName(ip));
-    
+
     final HttpRequest request = HttpRequest.GET("/")
-      .addHeader(RemoteAddress.create(remoteAddress)); // 
-    
+      .addHeader(RemoteAddress.create(remoteAddress)); //
+
     testRoute(route).run(request)
       .assertEntity("Client's IP is " + ip);
 
@@ -129,7 +129,7 @@ public class MiscDirectivesExamplesTest extends JUnitRouteTest {
       LanguageRanges.ALL.withQValue(0.1f),
       Language.create("de-DE").withQValue(0.5f)
     ));
-    
+
     testRoute(enRoute).run(request).assertEntity("en-US");
     testRoute(deHuRoute).run(request).assertEntity("de-DE");
     //#selectPreferredLanguage

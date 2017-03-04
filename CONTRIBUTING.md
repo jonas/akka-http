@@ -52,10 +52,10 @@ We encourage changes that make it easier to achieve our goals in an efficient wa
 
 ## General Workflow
 
-The below steps are how to get a patch into a main development branch (e.g. `master`). 
+The below steps are how to get a patch into a main development branch (e.g. `master`).
 The steps are exactly the same for everyone involved in the project (be it core team, or first time contributor).
 
-1. Make sure an issue exists in the [issue tracker](https://github.com/akka/akka-http/issues) for the work you want to contribute. 
+1. Make sure an issue exists in the [issue tracker](https://github.com/akka/akka-http/issues) for the work you want to contribute.
    - If there is no ticket for it, [create one](https://github.com/akka/akka-http/issues/new) first.
 1. [Fork the project](https://github.com/akka/akka-http#fork-destination-box) on GitHub. You'll need to create a feature-branch for your work on your fork, as this way you'll be able to submit a PullRequest against the mainline Akka-http.
 1. Create a branch on your fork and work on the feature. For example: `git checkout -b wip-custom-headers-akka-http`
@@ -67,7 +67,7 @@ The steps are exactly the same for everyone involved in the project (be it core 
 1. If you're not already on the contributors white-list, the @akka-ci bot will ask `Can one of the repo owners verify this patch?`, to which a core member will reply by commenting `OK TO TEST`. This is just a sanity check to prevent malicious code from being run on the Jenkins cluster.
 1. Now both committers and interested people will review your code. This process is to ensure the code we merge is of the best possible quality, and that no silly mistakes slip through. You're expected to follow-up these comments by adding new commits to the same branch. The commit messages of those commits can be more lose, for example: `Removed debugging using printline`, as they all will be squashed into one commit before merging into the main branch.
     - The community and team are really nice people, so don't be afraid to ask follow up questions if you didn't understand some comment, or would like to clarify how to continue with a given feature. We're here to help, so feel free to ask and discuss any kind of questions you might have during review!
-1. After the review you should fix the issues as needed (pushing a new commit for new review etc.), iterating until the reviewers give their thumbs up–which is signalled usually by a comment saying `LGTM`, which means "Looks Good To Me". 
+1. After the review you should fix the issues as needed (pushing a new commit for new review etc.), iterating until the reviewers give their thumbs up–which is signalled usually by a comment saying `LGTM`, which means "Looks Good To Me".
     - In general a PR is expected to get 2 LGTMs from the team before it is merged. If the PR is trivial, or under under special circumstances (such as most of the team being on vacation, a PR was very thoroughly reviewed/tested and surely is correct) one LGTM may be fine as well.
 1. If the code change needs to be applied to other branches as well (for example a bugfix needing to be backported to a previous version), one of the team will either ask you to submit a PR with the same commit to the old branch, or do this for you.
    - Backport pull requests such as these are marked using the phrase`for validation` in the title to make the purpose clear in the pull request list. They can be merged once validation passes without additional review (if no conflicts).
@@ -112,7 +112,7 @@ PR_TARGET_BRANCH=origin/example sbt validatePullRequest
 ## Developing against Akka `master`
 
 Since Akka HTTP is released separately to Akka "core" yet some features require changes in Akka itself, it is sometimes very useful
-to be able to develop Akka HTTP with Akka's sources used directly instead of the binary dependency. You can check out the Akka 
+to be able to develop Akka HTTP with Akka's sources used directly instead of the binary dependency. You can check out the Akka
 repository and run sbt with `-Dakka.sources=$HOME/akka` to develop Akka HTTP with Akka as a source dependency instead of a binary one.
 
 This allows simple and fast iterations on changes that would need to be introduced in Akka to develop a feature in HTTP that would require those.
@@ -122,7 +122,7 @@ Binary compatibility rules and guarantees are described in depth in the [Binary 
 ](http://doc.akka.io/docs/akka/snapshot/common/binary-compatibility-rules.html) section of the documentation.
 
 Akka-http uses MiMa (which is short for [Lightbend Migration Manager](https://github.com/typesafehub/migration-manager)) to
-validate binary compatibility of incoming Pull Requests. If your PR fails due to binary compatibility issues, you may see 
+validate binary compatibility of incoming Pull Requests. If your PR fails due to binary compatibility issues, you may see
 an error like this:
 
 ```
@@ -161,10 +161,10 @@ For a Pull Request to be considered at all it has to meet these requirements:
 
 Some additional guidelines regarding source code are:
 
-- files should start with a ``Copyright (C) 2017 Lightbend Inc. <http://www.lightbend.com>`` copyright header 
+- files should start with a ``Copyright (C) 2017 Lightbend Inc. <http://www.lightbend.com>`` copyright header
 - keep the code [DRY](http://programmer.97things.oreilly.com/wiki/index.php/Don%27t_Repeat_Yourself)
 - apply the [Boy Scout Rule](http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule) whenever you have the chance to
-- Never delete or change existing copyright notices, just add additional info.  
+- Never delete or change existing copyright notices, just add additional info.
 - Do not use ``@author`` tags since it does not encourage [Collective Code Ownership](http://www.extremeprogramming.org/rules/collective.html).
   - Contributors , each project should make sure that the contributors gets the credit they deserve—in a text file or page on the project website and in the release notes etc.
 
@@ -192,7 +192,7 @@ To generate documentation you can:
 > paradox
 ```
 
-The rendered documentation will be available under `docs/target/paradox/site/index.html`. 
+The rendered documentation will be available under `docs/target/paradox/site/index.html`.
 
 ### JavaDoc
 
@@ -273,7 +273,7 @@ the validator to test all projects.
 
 ## Source style
 
-### Scala style 
+### Scala style
 
 Akka-http uses [Scalariform](https://github.com/daniel-trinh/scalariform) to enforce some of the code style rules.
 
@@ -290,7 +290,7 @@ Thus we ask Java contributions to follow these simple guidelines:
 
 Avoid short test timeouts, since Jenkins server may GC heavily causing spurious test failures. GC pause or other hiccup of 2 seconds is common in our CI environment. Please note that usually giving a larger timeout *does not slow down the tests*, as in an `expectMessage` call for example it usually will complete quickly.
 
-There is a number of ways timeouts can be defined in Akka tests. The following ways to use timeouts are recommended (in order of preference): 
+There is a number of ways timeouts can be defined in Akka tests. The following ways to use timeouts are recommended (in order of preference):
 
 * `remaining` is first choice (requires `within` block)
 * `remainingOrDefault` is second choice
@@ -305,12 +305,12 @@ You can read up on remaining and friends in [TestKit.scala](https://github.com/a
 
 ## Continuous Integration
 
-Each project should be configured to use a continuous integration (CI) tool (i.e. a build server à la Jenkins). 
+Each project should be configured to use a continuous integration (CI) tool (i.e. a build server à la Jenkins).
 
 Lightbend is sponsoring a [Jenkins server farm](https://jenkins.akka.io/), sometimes referred to as "the Lausanne cluster".
 The cluster is made out of real bare-metal boxes, and maintained by the Akka team (and other very helpful people at Lightbend).
 
-In addition to PR Validation the cluster is also used for nightly and performance test runs. 
+In addition to PR Validation the cluster is also used for nightly and performance test runs.
 
 ## Related links
 

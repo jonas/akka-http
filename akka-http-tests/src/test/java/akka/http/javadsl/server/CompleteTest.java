@@ -31,7 +31,7 @@ public class CompleteTest extends JUnitRouteTest {
 
     @Test
     public void completeAsJacksonJson() {
-        
+
         @SuppressWarnings("unused") // The getters are used reflectively by Jackson
         class Person {
             public String getFirstName() { return "Peter"; }
@@ -47,17 +47,17 @@ public class CompleteTest extends JUnitRouteTest {
             .assertMediaType("application/json")
             .assertEntity("{\"age\":138,\"firstName\":\"Peter\",\"lastName\":\"Parker\"}");
     }
-    
+
     private CompletionStage<String> doSlowCalculation(int x, int y) {
         return CompletableFuture.supplyAsync(() -> {
             int result = x + y;
             return String.format("%d + %d = %d",x, y, result);
         });
     }
-    
+
     @Test
     public void completeWithFuture() {
-        Route route = 
+        Route route =
             parameter(INTEGER, "x", x ->
                 parameter(INTEGER, "y", y ->
                     onSuccess(() -> doSlowCalculation(x, y), Directives::complete)

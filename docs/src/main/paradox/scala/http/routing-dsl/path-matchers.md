@@ -146,7 +146,7 @@ Path matcher instances can be transformed with these modifier methods:
 a postfix call. `matcher /` is identical to `matcher ~ Slash` but shorter and easier to read.
 
 ?
-: 
+:
 By postfixing a matcher with `?` you can turn any `PathMatcher` into one that always matches, optionally consumes
 and potentially extracts an `Option` of the underlying matchers extraction. The result type depends on the type
 of the underlying matcher:
@@ -158,7 +158,7 @@ of the underlying matcher:
 |`PathMatcher[L: Tuple]` | `PathMatcher[Option[L]]`|
 
 repeat(separator: PathMatcher0 = PathMatchers.Neutral)
-: 
+:
 By postfixing a matcher with `repeat(separator)` you can turn any `PathMatcher` into one that always matches,
 consumes zero or more times (with the given separator) and potentially extracts a `List` of the underlying matcher's
 extractions. The result type depends on the type of the underlying matcher:

@@ -111,7 +111,7 @@ public class SimpleServerApp extends AllDirectives { // or import Directives.*
 
     final SimpleServerApp app = new SimpleServerApp();
     final Flow<HttpRequest, HttpResponse, NotUsed> flow = app.createRoute().flow(system, materializer);
-    
+
     Http.get(system).bindAndHandle(flow, ConnectHttp.toHost("localhost", 8080), materializer);
 
     System.out.println("Type RETURN to exit");

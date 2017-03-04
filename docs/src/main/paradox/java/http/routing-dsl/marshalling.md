@@ -14,7 +14,7 @@ On the server-side marshalling is used to convert an application-domain object t
 contain an `Accept` header that lists acceptable content types for the client. A marshaller contains the logic to
 negotiate the result content types based on the `Accept` and the `AcceptCharset` headers.
 
-Marshallers can be specified when completing a request with `RequestContext.complete` or by using one of the 
+Marshallers can be specified when completing a request with `RequestContext.complete` or by using one of the
 `RouteDirectives.complete` directives.
 
 These marshallers are provided by akka-http:
@@ -29,7 +29,7 @@ combined with `Marshaller.entityToResponse` to create custom marshallers.
 
 On the server-side unmarshalling is used to convert a request (entity) to an application-domain object. This is done
 in the `MarshallingDirectives.request` or `MarshallingDirectives.entity` directive. There are several unmarshallers
-provided by akka-http: 
+provided by akka-http:
 
 >
  * Use @ref[Json Support via Jackson](../common/json-support.md#json-jackson-support-java) to create an unmarshaller that can convert an `application/json` request
