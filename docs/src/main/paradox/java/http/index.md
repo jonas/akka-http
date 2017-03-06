@@ -7,6 +7,8 @@ Akka HTTP API - @javadoc:[Javadoc](akka.http.javadsl.package-summary)
 
 @@@ index
 
+* [security](security.md)
+* [release notes](release-notes.md)
 * [introduction](introduction.md)
 * [configuration](configuration.md)
 * [http-model](common/http-model.md)

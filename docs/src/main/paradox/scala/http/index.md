@@ -7,6 +7,8 @@ Akka HTTP API - @scaladoc:[ScalaDoc](akka.http.scaladsl.index)
 
 @@@ index
 
+* [security](security.md)
+* [release notes](release-notes.md)
 * [introduction](introduction.md)
 * [configuration](configuration.md)
 * [http-model](common/http-model.md)

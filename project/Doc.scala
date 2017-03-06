@@ -9,9 +9,36 @@ import sbtunidoc.Plugin.{ ScalaUnidoc, JavaUnidoc, Genjavadoc, scalaJavaUnidocSe
 import sbt.Keys._
 import sbt.File
 import scala.annotation.tailrec
+import com.lightbend.paradox.sbt.ParadoxPlugin
+import com.lightbend.paradox.sbt.ParadoxPlugin.autoImport._
 
 object Doc {
   val BinVer = """(\d+\.\d+)\.\d+""".r
+  val Java = config("java")
+  val Scala = config("scala")
+
+  def paradoxSettings(lang: Configuration): Seq[Setting[_]] =
+    ParadoxPlugin.paradoxSettings(lang) ++
+    inConfig(lang)(Seq(
+      sourceDirectory in paradox := baseDirectory.value / "src" / "main" / "paradox" / lang.name,
+      paradoxOverlayDirectories := Seq(baseDirectory.value / "src" / "main" / "paradox" / "common"),
+      paradoxProperties ++= Map(
+        "akka.version" -> Dependencies.akkaVersion,
+        "scala.binaryVersion" -> scalaBinaryVersion.value,
+        "scala.version" -> scalaVersion.value,
+        "scaladoc.version" -> scalaVersion.value,
+        "crossString" -> (scalaVersion.value match {
+          case akka.Doc.BinVer(_) => ""
+          case _                  => "cross CrossVersion.full"
+        }),
+        "extref.akka-docs.base_url" -> s"http://doc.akka.io/docs/akka/${Dependencies.akkaVersion}/%s",
+        "javadoc.akka.http.base_url" -> {
+          val v = if (isSnapshot.value) "current" else version.value
+          s"http://doc.akka.io/japi/akka-http/$v"
+        },
+        "github.base_url" -> GitHub.url(version.value)
+      )
+    ))
 }
 
 object Scaladoc extends AutoPlugin {

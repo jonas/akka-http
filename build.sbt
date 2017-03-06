@@ -151,22 +151,8 @@ lazy val docs = project("docs")
     name := "akka-http-docs",
     paradoxTheme := Some(builtinParadoxTheme("generic")),
     paradoxNavigationDepth := 3,
-    paradoxProperties in Compile ++= Map(
-      "akka.version" -> Dependencies.akkaVersion,
-      "scala.binaryVersion" -> scalaBinaryVersion.value,
-      "scala.version" -> scalaVersion.value,
-      "scaladoc.version" -> scalaVersion.value,
-      "crossString" -> (scalaVersion.value match {
-        case akka.Doc.BinVer(_) => ""
-        case _                  => "cross CrossVersion.full"
-      }),
-      "extref.akka-docs.base_url" -> s"http://doc.akka.io/docs/akka/${Dependencies.akkaVersion}/%s",
-      "javadoc.akka.http.base_url" -> {
-        val v = if (isSnapshot.value) "current" else version.value
-        s"http://doc.akka.io/japi/akka-http/$v"
-      },
-      "github.base_url" -> GitHub.url(version.value)
-    ),
+    akka.Doc.paradoxSettings(akka.Doc.Java),
+    akka.Doc.paradoxSettings(akka.Doc.Scala),
     Formatting.docFormatSettings,
     additionalTasks in ValidatePR += paradox in Compile,
     deployRsyncArtifact := List((paradox in Compile).value -> s"www/docs/akka-http/${version.value}")

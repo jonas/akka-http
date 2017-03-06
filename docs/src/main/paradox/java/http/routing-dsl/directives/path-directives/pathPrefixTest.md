@@ -11,7 +11,7 @@ This directive is very similar to the @ref[pathPrefix](pathPrefix.md#pathprefix-
 it matched (if it matched) is *not* consumed. The unmatched path of the `RequestContext` is therefore left as
 is even in the case that the directive successfully matched and the request is passed on to its inner route.
 
-For more info on how to create a `PathMatcher` see @ref[The PathMatcher DSL](../../../../../scala/http/routing-dsl/path-matchers.md#pathmatcher-dsl).
+For more info on how to create a `PathMatcher` see @ref[The PathMatcher DSL](../../../routing-dsl/path-matchers.md#pathmatcher-dsl).
 
 As opposed to its @ref[rawPathPrefixTest](rawPathPrefixTest.md#rawpathprefixtest-java) counterpart `pathPrefixTest` automatically adds a leading slash to its
 `PathMatcher` argument, you therefore don't have to start your matching expression with an explicit slash.

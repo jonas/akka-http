@@ -140,5 +140,5 @@ shutting down the actor system.
 
 ## Example
 
-For now, please see the Scala examples in @ref[Scala Host-Level Client API](../../../scala/http/client-side/host-level.md#examples).
+For now, please see the Scala examples in [Scala Host-Level Client API](../../../scala/http/client-side/host-level.html#examples).
 If you want to help with converting the examples see issue [#836](https://github.com/akka/akka-http/issues/836).
