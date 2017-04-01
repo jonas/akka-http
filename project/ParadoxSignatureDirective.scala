@@ -14,6 +14,8 @@ import scala.collection.JavaConverters._
 import scala.io.{Codec, Source}
 
 object ParadoxSupport {
+  val paradoxLocalApiEnabled = CliOption("akka.paradox.localapi", false)
+
   val paradoxWithSignatureDirective = Seq(
     (paradoxProcessor in Compile) := {
       val _ = paradoxProcessor in Compile // touch old reference
@@ -28,7 +30,23 @@ object ParadoxSupport {
           new DirectiveSerializer(Writer.defaultDirectives(context) :+
             new SignatureDirective(context.location.tree.label, msg => streams.value.log.warn(msg))
       ))))
-    }
+    },
+    paradoxProperties in Compile ++= paradoxLocalApiEnabled.ifTrue {
+      val targetPath = (baseDirectory in ThisBuild).value / "target"
+      val scaladocPath = targetPath / ("scala-" + scalaBinaryVersion.value) / "unidoc" / "index.html"
+      val javadocPath = targetPath / "javaunidoc" / "index.html"
+
+      def property(name: String, path: File, command: String) =
+        if (path.exists)
+          Map(name -> path.toURI.toString)
+        else {
+          streams.value.log.error(s"Run `$command` to generate docs for akka.paradox.localapi")
+          Map.empty
+        }
+
+      property("scaladoc.akka.http.base_url", scaladocPath, "sbt unidoc") ++
+        property("javadoc.akka.http.base_url", javadocPath, "sbt -Dakka.genjavadoc.enabled=true javaunidoc:doc")
+    }.getOrElse(Map.empty)
   )
 
   class SignatureDirective(page: Page, logWarn: String => Unit) extends LeafBlockDirective("signature") {
